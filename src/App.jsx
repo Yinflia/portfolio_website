@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import Skills from "./components/Skills";
 // import Projects from "./components/Projects";
 // import Certificates from "./components/Certificates";
 // import Contact from "./components/Contact";
@@ -38,6 +39,7 @@ const App = () => {
       <main className="relative z-10">
         <Hero darkMode={darkMode} />
         <About darkMode={darkMode} />
+        <Skills darkMode={darkMode} />
         {/* <Projects darkMode={darkMode} />
         <Certificates darkMode={darkMode} />
         <Contact darkMode={darkMode} /> */}
