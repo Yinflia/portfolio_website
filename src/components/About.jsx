@@ -71,7 +71,7 @@ const About = ({ darkMode }) => {
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center sm:items-start">
                             <motion.a
-                                href="CV SISWA GIBRAN.png"
+                                href=""
                                 download
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
