@@ -5,9 +5,9 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
-// import Projects from "./components/Projects";
-// import Certificates from "./components/Certificates";
-// import Contact from "./components/Contact";
+import Projects from "./components/Projects";
+import Certificates from "./components/Certificates";
+import Contact from "./components/Contact";
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -40,9 +40,9 @@ const App = () => {
         <Hero darkMode={darkMode} />
         <About darkMode={darkMode} />
         <Skills darkMode={darkMode} />
-        {/* <Projects darkMode={darkMode} />
+        <Projects darkMode={darkMode} />
         <Certificates darkMode={darkMode} />
-        <Contact darkMode={darkMode} /> */}
+        <Contact darkMode={darkMode} />
       </main>
 
       {/* Footer */}

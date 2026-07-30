@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Download } from "lucide-react";
+// import { Download } from "lucide-react";
 import aboutImg from "../assets/hero.png";
 
 const About = ({ darkMode }) => {
@@ -69,7 +69,7 @@ const About = ({ darkMode }) => {
                             open-source projects, or sharing knowledge with the developer community.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center sm:items-start">
+                        {/* <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center sm:items-start">
                             <motion.a
                                 href=""
                                 download
@@ -80,7 +80,7 @@ const About = ({ darkMode }) => {
                                 <Download className="w-5 h-5" />
                                 Download CV
                             </motion.a>
-                        </div>
+                        </div> */}
                     </motion.div>
 
                     {/* 2. Photo Circle */}

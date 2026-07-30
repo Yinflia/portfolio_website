@@ -48,7 +48,7 @@ const Hero = ({ darkMode }) => {
         }, isDeleting ? 50 : 100);
 
         return () => clearTimeout(timeout);
-    }, [typedText, isDeleting, textIndex, texts]);
+    });
 
     return (
         <section id="home" className="min-h-screen flex items-center justify-center py-20 px-6 md:px-8 lg:px-16">

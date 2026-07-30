@@ -21,7 +21,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
 }, [isMenuOpen]);
 
-    // 1. SCROLLSPY MANUAL (Jauh lebih akurat di Mobile)
+    // 1. SCROLLSPY MANUAL
     useEffect(() => {
         const handleScroll = () => {
             const sections = document.querySelectorAll('section');
@@ -73,6 +73,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
         { name: 'About', href: '#about' },
         { name: 'Skills', href: '#skills' },
         { name: 'Projects', href: '#projects' },
+        { name: 'Certificates', href: '#certificates' },
         { name: 'Contact', href: '#contact' },
     ];
 
@@ -98,7 +99,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
     const colors = darkMode ? darkColors : lightColors;
 
-    // 3. SMOOTH SCROLL KHUSUS MOBILE (Dengan Delay)
+    // 3. SMOOTH SCROLL KHUSUS MOBILE
     const handleNavClick = (e, itemName, href) => {
         e.preventDefault();
         setActiveSection(itemName.toLowerCase());
@@ -188,12 +189,12 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                         </motion.button>
                         
                         <motion.a
-                            href="mailto:contact@nabilafalia.my.id"
+                            href='#contact'
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className={`hidden lg:block px-6 py-2 font-semibold rounded-full bg-linear-to-r ${colors.button} text-white shadow-md hover:shadow-lg transition-shadow`}
                         >
-                            Hire Me
+                            Contact Me
                         </motion.a>
                     </div>
 
@@ -255,12 +256,12 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                                 ))}
                                 
                                 <motion.a
-                                    href="mailto:contact@nabilafalia.my.id"
+                                    href= '#contact'
                                     onClick={() => setIsMenuOpen(false)}
                                     whileTap={{ scale: 0.95 }}
                                     className={`block py-3 px-4 text-center font-semibold rounded-lg bg-linear-to-r ${colors.button} text-white shadow-md mt-4`}
                                 >
-                                    Hire Me
+                                    Contact Me
                                 </motion.a>
                             </div>
                         </motion.div>
