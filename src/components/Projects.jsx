@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X, ExternalLink, Search } from "lucide-react";
 
@@ -7,6 +7,17 @@ const Projects = ({ darkMode }) => {
     const [selectedProject, setSelectedProject] = useState(null);
     const [lightboxImage, setLightboxImage] = useState(null);
     const [lightboxIndex, setLightboxIndex] = useState(0);
+
+    useEffect(() => {
+            if (selectedProject) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'unset';
+            }
+            return () => {
+                document.body.style.overflow = 'unset';
+            };
+        }, [selectedProject]);
 
     const projectsData = {
         ecommerce: {
@@ -282,15 +293,16 @@ const Projects = ({ darkMode }) => {
                                     ))}
                                 </div>
                             </div>
-
-                            <a 
-                                href={selectedProject.liveDemo}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-full bg-linear-to-r from-orange-500 to-amber-500 text-white py-4 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/40 hover:scale-[1.02] inline-flex items-center justify-center gap-2"
-                            >
-                                <ExternalLink className="w-5 h-5" /> View Project
-                            </a>
+                            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+                                <a 
+                                    href={selectedProject.liveDemo}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full sm:w-auto bg-linear-to-r from-orange-500 to-amber-500 text-white py-3 sm:py-4 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/40 hover:scale-[1.02] inline-flex items-center justify-center gap-2"
+                                >
+                                    <ExternalLink className="w-5 h-5" /> View Project
+                                </a>
+                            </div>
                         </div>
                     </motion.div>
                 </motion.div>,
