@@ -15,11 +15,11 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
             if (isMenuOpen) {
                 setIsMenuOpen(false);
             }
-    };
+        };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-}, [isMenuOpen]);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isMenuOpen]);
 
     // 1. SCROLLSPY MANUAL
     useEffect(() => {
@@ -99,7 +99,7 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
 
     const colors = darkMode ? darkColors : lightColors;
 
-    // 3. SMOOTH SCROLL KHUSUS MOBILE
+    // 3. SMOOTH SCROLL DENGAN OFFSET
     const handleNavClick = (e, itemName, href) => {
         e.preventDefault();
         setActiveSection(itemName.toLowerCase());
@@ -188,8 +188,10 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                             )}
                         </motion.button>
                         
+                        {/* Desktop Contact Me Button dengan Offset Scroll */}
                         <motion.a
-                            href='#contact'
+                            href="#contact"
+                            onClick={(e) => handleNavClick(e, 'Contact', '#contact')}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className={`hidden lg:block px-6 py-2 font-semibold rounded-full bg-linear-to-r ${colors.button} text-white shadow-md hover:shadow-lg transition-shadow`}
@@ -255,9 +257,10 @@ const Navbar = ({ darkMode, toggleDarkMode }) => {
                                     </a>
                                 ))}
                                 
+                                {/* Mobile Contact Me Button dengan Offset Scroll */}
                                 <motion.a
-                                    href= '#contact'
-                                    onClick={() => setIsMenuOpen(false)}
+                                    href="#contact"
+                                    onClick={(e) => handleNavClick(e, 'Contact', '#contact')}
                                     whileTap={{ scale: 0.95 }}
                                     className={`block py-3 px-4 text-center font-semibold rounded-lg bg-linear-to-r ${colors.button} text-white shadow-md mt-4`}
                                 >

@@ -1,6 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Award } from "lucide-react";
+import { createPortal } from "react-dom";
+import { Award, Eye, X, ExternalLink } from "lucide-react";
 
 import certificate_1 from "../assets/certificate/sertificate_1.jpg";
 
@@ -54,20 +55,7 @@ const getItemsPerSlide = () => {
     return 3;
 };
 
-// Helper: baca posisi slide dari hash URL saat pertama kali load
-const getInitialActiveIndex = () => {
-    if (typeof window === 'undefined') return 0;
-    const hash = window.location.hash;
-    if (hash.startsWith('#slide-')) {
-        const index = parseInt(hash.replace('#slide-', ''), 10);
-        if (!isNaN(index) && index >= 0) {
-            return index;
-        }
-    }
-    return 0;
-};
-
-const CertificateCard = ({ cert, colors }) => {
+const CertificateCard = ({ cert, colors, onView }) => {
     const [imgError, setImgError] = useState(false);
 
     return (
@@ -79,7 +67,6 @@ const CertificateCard = ({ cert, colors }) => {
             whileHover={{ y: -8 }}
             className={`rounded-xl border ${colors.border} ${colors.cardBg} ${colors.cardShadow} ${colors.cardShadowHover} transition-all duration-300 overflow-hidden flex flex-col h-full`}
         >
-            {/* Container dengan aspect ratio 17/12 dan object-contain */}
             <div className="relative w-full" style={{ aspectRatio: '17/12' }}>
                 {!imgError ? (
                     <img
@@ -95,13 +82,15 @@ const CertificateCard = ({ cert, colors }) => {
                     </div>
                 )}
                 
-                {/* Link tanpa target="_blank" agar buka di tab yang sama */}
-                <a
-                    href={cert.link}
-                    className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 cursor-pointer shadow-inner"
+                <button
+                    onClick={() => onView(cert)}
+                    className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 cursor-pointer shadow-inner w-full h-full"
                 >
-                    <span className="text-white font-semibold text-sm drop-shadow-md">View Certificate →</span>
-                </a>
+                    <span className="text-white font-semibold text-sm drop-shadow-md flex items-center gap-1">
+                        <Eye className="w-4 h-4" />
+                        View Certificate
+                    </span>
+                </button>
             </div>
 
             <div className="p-5 md:p-6 flex flex-col flex-1">
@@ -140,9 +129,20 @@ const CertificateCard = ({ cert, colors }) => {
 };
 
 const Certificates = ({ darkMode }) => {
-    // Lazy initialization: menggunakan fungsi getInitialActiveIndex
-    const [activeIndex, setActiveIndex] = useState(getInitialActiveIndex);
+    const [activeIndex, setActiveIndex] = useState(0);
     const [itemsPerSlide, setItemsPerSlide] = useState(getItemsPerSlide);
+    const [selectedCert, setSelectedCert] = useState(null);
+
+    useEffect(() => {
+        if (selectedCert) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedCert]);
 
     const lightColors = {
         textPrimary: "text-gray-900",
@@ -189,14 +189,6 @@ const Certificates = ({ darkMode }) => {
 
     const totalSlides = Math.max(1, Math.ceil(certificatesData.length / itemsPerSlide));
     const safeActiveIndex = Math.min(activeIndex, totalSlides - 1);
-
-    // Update hash URL setiap kali slide berubah (tanpa menambah history entry)
-    useEffect(() => {
-        const newHash = `#slide-${safeActiveIndex}`;
-        if (window.location.hash !== newHash) {
-            window.history.replaceState(null, '', newHash);
-        }
-    }, [safeActiveIndex]);
 
     const nextSlide = () => {
         setActiveIndex((prev) => (prev + 1) % totalSlides);
@@ -246,6 +238,7 @@ const Certificates = ({ darkMode }) => {
                                                 key={cert.id} 
                                                 cert={cert} 
                                                 colors={colors} 
+                                                onView={setSelectedCert}
                                             />
                                         ))}
                                     </div>
@@ -282,6 +275,62 @@ const Certificates = ({ darkMode }) => {
                     </div>
                 </div>
             </div>
+
+            {/* MODAL FULL SCREEN - MENGGUNAKAN CREATE PORTAL */}
+            {selectedCert && createPortal(
+                <AnimatePresence>
+                    <motion.div
+                        key="modal-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-99999 flex items-center justify-center bg-black/95 backdrop-blur-md p-4"
+                        onClick={() => setSelectedCert(null)}
+                    >
+                        <motion.div
+                            key="modal-content"
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="relative max-w-5xl w-full flex flex-col items-center"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+
+                            {/* BINGKAI GAMBAR 16:9 */}
+                            <div 
+                                className="relative w-full rounded-xl overflow-hidden bg-black flex items-center justify-center border-4 border-orange-500/60 shadow-2xl shadow-orange-500/30 p-2 sm:p-3"
+                                style={{ aspectRatio: '16/9' }}
+                            >
+                                <img
+                                    src={selectedCert.image}
+                                    alt={selectedCert.title}
+                                    className="max-w-full max-h-full object-contain rounded-lg"
+                                />
+                            </div>
+
+                            <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+                                <a
+                                    href={selectedCert.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-6 py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-full transition-all duration-300 flex items-center gap-2 shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50"
+                                >
+                                    <ExternalLink className="w-5 h-5" />
+                                    Akses Link Sumber Sertifikat
+                                </a>
+                                <button
+                                    onClick={() => setSelectedCert(null)}
+                                    className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-full transition-all duration-300 flex items-center gap-2"
+                                >
+                                    <X className="w-5 h-5" />
+                                    Tutup
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                </AnimatePresence>,
+                document.body
+            )}
         </section>
     );
 };
