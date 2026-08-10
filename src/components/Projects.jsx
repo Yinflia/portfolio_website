@@ -35,35 +35,35 @@ const Projects = ({ darkMode }) => {
             ],
             liveDemo: 'https://project-sena.nabilafalia.my.id'
         },
-        // taskapp: {
-        //     id: 'taskapp',
-        //     title: 'Task Management App',
-        //     description: 'A collaborative task management application with real-time updates, team collaboration features, task assignment, deadline tracking.',
-        //     longDescription: 'This task management application helps teams organize, track, and manage their work more effectively. Key features include creating and assigning tasks to team members, setting priorities and deadlines, real-time notifications and updates, file attachments and comments, progress tracking with visual charts.',
-        //     technologies: ['PHP', 'MySQL', 'CSS3', 'JavaScript', 'WebSocket', 'Chart.js'],
-        //     icon: 'fas fa-tasks',
-        //     gallery: [
-        //         { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Dashboard' },
-        //         { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Task Board' },
-        //         { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Analytics' }
-        //     ],
-        //     liveDemo: 'https://taskapp-anda.vercel.app'
-        // },
-        // analytics: {
-        //     id: 'analytics',
-        //     title: 'Analytics Dashboard',
-        //     description: 'An interactive data visualization dashboard featuring real-time analytics, customizable charts and graphs, data export functionality.',
-        //     longDescription: 'This analytics dashboard provides businesses with powerful data visualization and reporting capabilities. The system features real-time data updates, interactive charts using D3.js and Chart.js, customizable dashboard widgets, data filtering and segmentation, automated report generation.',
-        //     technologies: ['HTML5', 'CSS3', 'JavaScript', 'D3.js', 'Chart.js', 'PHP'],
-        //     icon: 'fas fa-chart-line',
-        //     gallery: [
-        //         { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Dashboard Overview' },
-        //         { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Reports' },
-        //         { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Data Visualization' },
-        //         { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Settings' }
-        //     ],
-        //     liveDemo: 'https://analytics-anda.netlify.app'
-        // }
+        taskapp: {
+            id: 'taskapp',
+            title: 'Task Management App',
+            description: 'A collaborative task management application with real-time updates, team collaboration features, task assignment, deadline tracking.',
+            longDescription: 'This task management application helps teams organize, track, and manage their work more effectively. Key features include creating and assigning tasks to team members, setting priorities and deadlines, real-time notifications and updates, file attachments and comments, progress tracking with visual charts.',
+            technologies: ['PHP', 'MySQL', 'CSS3', 'JavaScript', 'WebSocket', 'Chart.js'],
+            icon: 'fas fa-tasks',
+            gallery: [
+                { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Dashboard' },
+                { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Task Board' },
+                { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Analytics' }
+            ],
+            liveDemo: 'https://taskapp-anda.vercel.app'
+        },
+        analytics: {
+            id: 'analytics',
+            title: 'Analytics Dashboard',
+            description: 'An interactive data visualization dashboard featuring real-time analytics, customizable charts and graphs, data export functionality.',
+            longDescription: 'This analytics dashboard provides businesses with powerful data visualization and reporting capabilities. The system features real-time data updates, interactive charts using D3.js and Chart.js, customizable dashboard widgets, data filtering and segmentation, automated report generation.',
+            technologies: ['HTML5', 'CSS3', 'JavaScript', 'D3.js', 'Chart.js', 'PHP'],
+            icon: 'fas fa-chart-line',
+            gallery: [
+                { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Dashboard Overview' },
+                { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Reports' },
+                { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Data Visualization' },
+                { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Settings' }
+            ],
+            liveDemo: 'https://analytics-anda.netlify.app'
+        }
     };
 
     const projectList = Object.values(projectsData);
@@ -219,18 +219,17 @@ const Projects = ({ darkMode }) => {
                         </button>
 
                         <div className="p-6">
-                            {/* PERUBAHAN 3: Aspect Ratio 9:16 pada gambar modal (dengan max-h agar tidak terlalu tinggi di desktop) */}
                             {selectedProject.icon ? (
                                 <div 
                                     className="w-full bg-linear-to-br from-orange-500/20 to-amber-500/20 rounded-xl flex items-center justify-center mb-6"
-                                    style={{ aspectRatio: '9/16', maxHeight: '400px' }}
+                                    style={{ aspectRatio: '16/9', maxHeight: '400px' }}
                                 >
                                     <i className={`${selectedProject.icon} text-8xl text-orange-500`}></i>
                                 </div>
                             ) : selectedProject.gallery[0] && (
                                 <div 
                                     className="w-full rounded-xl overflow-hidden mb-6"
-                                    style={{ aspectRatio: '9/16', maxHeight: '400px' }}
+                                    style={{ aspectRatio: '16/9', maxHeight: '400px' }}
                                 >
                                     <img 
                                         src={selectedProject.gallery[0].image} 
