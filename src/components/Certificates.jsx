@@ -148,7 +148,7 @@ const Certificates = ({ darkMode }) => {
                                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                                 whileHover={{ y: -8 }}
                                                 onClick={() => setSelectedCert(cert)}
-                                                className={`group p-4 rounded-md border cursor-pointer transition-all duration-300 shadow-md flex flex-col h-full ${
+                                                className={`group p-4 rounded-md border cursor-pointer transition-all duration-300 flex flex-col h-full ${
                                                     darkMode 
                                                         ? 'bg-gray-800/80 border-gray-700 hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/20' 
                                                         : 'bg-white border-gray-200 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-200/50'
