@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { X, ExternalLink, Search } from "lucide-react";
+import project1_home_page from "../assets/projects/project1/home_page.png";
 
 const Projects = ({ darkMode }) => {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -9,61 +10,29 @@ const Projects = ({ darkMode }) => {
     const [lightboxIndex, setLightboxIndex] = useState(0);
 
     useEffect(() => {
-            if (selectedProject) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = 'unset';
-            }
-            return () => {
-                document.body.style.overflow = 'unset';
-            };
-        }, [selectedProject]);
+        if (selectedProject || lightboxImage) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedProject, lightboxImage]);
 
     const projectsData = {
-        ecommerce: {
-            id: 'ecommerce',
-            title: 'E-Commerce Platform',
-            description: 'A comprehensive full-stack e-commerce solution featuring product management, shopping cart functionality, secure payment gateway integration.',
-            longDescription: 'This e-commerce platform was developed to provide businesses with a complete online selling solution. The system includes features such as product catalog management with categories and filters, advanced search functionality, secure user authentication and authorization, shopping cart with wishlist, multiple payment gateway integration, real-time order tracking, inventory management, and a comprehensive admin dashboard.',
-            technologies: ['Laravel', 'MySQL', 'JavaScript', 'Bootstrap', 'Midtrans API', 'jQuery'],
-            icon: 'fas fa-shopping-cart',
+        personal_finance_website: {
+            id: 'personal_finance_website',
+            title: 'Personal Finance Website',
+            description: 'A personal finance website for tracking expenses, income, and budgeting.',
+            longDescription: 'This personal finance website is designed to help users manage their finances effectively. It offers features like expense tracking, income categorization, budget creation, and detailed reporting. The website provides a user-friendly interface for monitoring financial health and making informed decisions.',
+            technologies: ['HTML', 'CSS', 'JavaScript'],
+            icon: project1_home_page ? null : 'fas fa-wallet',
             gallery: [
-                { image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop', title: 'Halaman Utama' },
-                { image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop', title: 'Halaman Produk' },
-                { image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop', title: 'Shopping Cart' },
-                { image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop', title: 'Checkout' }
+                { image: project1_home_page, title: 'Home Page' }
             ],
             liveDemo: 'https://project-sena.nabilafalia.my.id'
         },
-        taskapp: {
-            id: 'taskapp',
-            title: 'Task Management App',
-            description: 'A collaborative task management application with real-time updates, team collaboration features, task assignment, deadline tracking.',
-            longDescription: 'This task management application helps teams organize, track, and manage their work more effectively. Key features include creating and assigning tasks to team members, setting priorities and deadlines, real-time notifications and updates, file attachments and comments, progress tracking with visual charts.',
-            technologies: ['PHP', 'MySQL', 'CSS3', 'JavaScript', 'WebSocket', 'Chart.js'],
-            icon: 'fas fa-tasks',
-            gallery: [
-                { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Dashboard' },
-                { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Task Board' },
-                { image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop', demo: '#', title: 'Analytics' }
-            ],
-            liveDemo: 'https://taskapp-anda.vercel.app'
-        },
-        analytics: {
-            id: 'analytics',
-            title: 'Analytics Dashboard',
-            description: 'An interactive data visualization dashboard featuring real-time analytics, customizable charts and graphs, data export functionality.',
-            longDescription: 'This analytics dashboard provides businesses with powerful data visualization and reporting capabilities. The system features real-time data updates, interactive charts using D3.js and Chart.js, customizable dashboard widgets, data filtering and segmentation, automated report generation.',
-            technologies: ['HTML5', 'CSS3', 'JavaScript', 'D3.js', 'Chart.js', 'PHP'],
-            icon: 'fas fa-chart-line',
-            gallery: [
-                { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Dashboard Overview' },
-                { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Reports' },
-                { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Data Visualization' },
-                { image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop', demo: '#', title: 'Settings' }
-            ],
-            liveDemo: 'https://analytics-anda.netlify.app'
-        }
     };
 
     const projectList = Object.values(projectsData);
@@ -101,10 +70,22 @@ const Projects = ({ darkMode }) => {
         setLightboxImage(null);
     };
 
-    const changeLightboxImage = (direction) => {
-        if (!lightboxImage) return;
-        const newIndex = (lightboxIndex + direction + lightboxImage.length) % lightboxImage.length;
-        setLightboxIndex(newIndex);
+    // const changeLightboxImage = (direction) => {
+    //     if (!lightboxImage) return;
+    //     const newIndex = (lightboxIndex + direction + lightboxImage.length) % lightboxImage.length;
+    //     setLightboxIndex(newIndex);
+    // };
+
+    const getProjectCover = (project) => {
+        return project.icon || project.gallery?.[0]?.image || null;
+    };
+
+    // Style untuk optimasi rendering gambar
+    const imageStyle = {
+        imageRendering: 'auto',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
     };
 
     return (
@@ -141,13 +122,12 @@ const Projects = ({ darkMode }) => {
                                         : 'bg-white border-gray-200 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-200/50'
                                 }`}
                             >
-                                {/* PERUBAHAN 1: Aspect Ratio 9:16 pada container gambar */}
                                 <div className="overflow-hidden rounded-md mb-4">
                                     <div 
                                         className={`w-full flex items-center justify-center ${
                                             darkMode ? 'bg-gray-700/50' : 'bg-gray-100'
                                         }`}
-                                        style={{ aspectRatio: '17/12' }}
+                                        style={{ aspectRatio: '16/9' }}
                                     >
                                         {proyek.icon ? (
                                             <i className={`${proyek.icon} text-6xl text-orange-500`}></i>
@@ -155,8 +135,9 @@ const Projects = ({ darkMode }) => {
                                             <img 
                                                 src={proyek.gallery[0]?.image} 
                                                 alt={proyek.title}
-                                                loading="lazy" /* PERUBAHAN 2: Lazy loading */
+                                                loading="lazy"
                                                 className="w-full h-full object-cover"
+                                                style={imageStyle}
                                             />
                                         )}
                                     </div>
@@ -219,23 +200,14 @@ const Projects = ({ darkMode }) => {
                         </button>
 
                         <div className="p-6">
-                            {selectedProject.icon ? (
-                                <div 
-                                    className="w-full bg-linear-to-br from-orange-500/20 to-amber-500/20 rounded-xl flex items-center justify-center mb-6"
-                                    style={{ aspectRatio: '16/9', maxHeight: '400px' }}
-                                >
-                                    <i className={`${selectedProject.icon} text-8xl text-orange-500`}></i>
-                                </div>
-                            ) : selectedProject.gallery[0] && (
-                                <div 
-                                    className="w-full rounded-xl overflow-hidden mb-6"
-                                    style={{ aspectRatio: '16/9', maxHeight: '400px' }}
-                                >
-                                    <img 
-                                        src={selectedProject.gallery[0].image} 
+                            {getProjectCover(selectedProject) && (
+                                <div className="mx-auto mb-6 w-full max-w-711.75 aspect-video overflow-hidden rounded-xl border-2 border-orange-500/30 shadow-lg bg-linear-to-br from-orange-500/20 to-amber-500/20">
+                                    <img
+                                        src={getProjectCover(selectedProject)}
                                         alt={selectedProject.title}
-                                        loading="lazy" /* PERUBAHAN 4: Lazy loading */
-                                        className="w-full h-full object-cover"
+                                        loading="lazy"
+                                        className="h-full w-full object-cover object-center"
+                                        style={imageStyle}
                                     />
                                 </div>
                             )}
@@ -279,8 +251,12 @@ const Projects = ({ darkMode }) => {
                                             <img 
                                                 src={item.image} 
                                                 alt={item.title}
-                                                loading="lazy" /* PERUBAHAN 5: Lazy loading */
+                                                loading="lazy"
                                                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                                                style={{
+                                                    ...imageStyle,
+                                                    willChange: 'transform',
+                                                }}
                                             />
                                             <div className="absolute inset-0 bg-orange-500/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center gap-2">
                                                 <Search className="w-8 h-8 text-white" />
@@ -325,7 +301,7 @@ const Projects = ({ darkMode }) => {
                         <X className="w-6 h-6" />
                     </button>
 
-                    <button
+                    {/* <button
                         onClick={(e) => { e.stopPropagation(); changeLightboxImage(-1); }}
                         className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
                     >
@@ -337,14 +313,18 @@ const Projects = ({ darkMode }) => {
                         className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
                     >
                         →
-                    </button>
+                    </button> */}
 
                     <div className="relative max-w-5xl w-full" onClick={(e) => e.stopPropagation()}>
                         <img 
                             src={lightboxImage[lightboxIndex]?.image} 
                             alt={lightboxImage[lightboxIndex]?.title}
-                            loading="lazy" /* PERUBAHAN 6: Lazy loading */
+                            loading="lazy"
                             className="w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                            style={{
+                                ...imageStyle,
+                                filter: 'blur(0.3px)',
+                            }}
                         />
                     </div>
                 </motion.div>,

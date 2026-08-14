@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Award, Eye, X, ExternalLink } from "lucide-react";
 
-import certificate_1 from "../assets/certificate/sertificate_1.jpg";
+import certificate_1 from "../assets/certificates/sertificate_1.jpg";
 
 const certificatesData = [
     {
@@ -85,7 +85,7 @@ const Certificates = ({ darkMode }) => {
     const darkColors = {
         textPrimary: "text-white",
         textSecondary: "text-gray-300",
-        cardBg: "bg-gray-800/80",
+        cardBg: "bg-gray-800/50",
         border: "border-gray-700",
         tagBg: "bg-orange-900/20",
         tagText: "text-orange-400",
@@ -115,7 +115,7 @@ const Certificates = ({ darkMode }) => {
     }
 
     return (
-        <section id="certificates" className={`py-20 px-4 sm:px-6 md:px-12 lg:px-20 ${darkMode ? 'bg-gray-800/40' : 'bg-orange-50/40'}`}>
+        <section id="certificates" className={`py-20 px-4 sm:px-6 md:px-12 lg:px-20 ${darkMode ? 'bg-gray-900/60' : 'bg-white/60'}`}>
             <div className="max-w-6xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -148,15 +148,18 @@ const Certificates = ({ darkMode }) => {
                                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                                                 whileHover={{ y: -8 }}
                                                 onClick={() => setSelectedCert(cert)}
-                                                className={`group p-4 rounded-md border cursor-pointer transition-all duration-300 flex flex-col h-full ${
+                                                className={`group p-4 rounded-md border overflow-hidden cursor-pointer transition-all duration-300 flex flex-col h-full ${
                                                     darkMode 
                                                         ? 'bg-gray-800/80 border-gray-700 hover:border-orange-500/50 hover:shadow-xl hover:shadow-orange-500/20' 
                                                         : 'bg-white border-gray-200 hover:border-orange-400 hover:shadow-xl hover:shadow-orange-200/50'
                                                 }`}
                                             >
                                                 {/* Container Gambar dengan Shadow */}
-                                                <div className="overflow-hidden rounded-md mb-4 relative shadow-md group-hover:shadow-xl group-hover:shadow-orange-500/20 transition-all duration-300" style={{ aspectRatio: '17/12' }}>
-                                                    <div className={`w-full h-full flex items-center justify-center ${darkMode ? 'bg-gray-700/50' : 'bg-gray-100'}`}>
+                                                <div className="overflow-hidden rounded-md mb-4 relative shadow-md group-hover:shadow-xl group-hover:shadow-orange-500/20 transition-all duration-300">
+                                                    <div 
+                                                        className={`w-full flex items-center justify-center ${darkMode ? 'bg-gray-700/50' : 'bg-gray-100'}`}
+                                                        style={{ aspectRatio: '4/3' }}
+                                                    >
                                                         <img 
                                                             src={cert.image} 
                                                             alt={cert.title}
@@ -165,7 +168,6 @@ const Certificates = ({ darkMode }) => {
                                                         />
                                                     </div>
                                                     
-                                                    {/* PERBAIKAN: Ditambahkan 'cursor-pointer' di sini */}
                                                     <button
                                                         onClick={() => setSelectedCert(cert)}
                                                         className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 cursor-pointer"
@@ -279,15 +281,12 @@ const Certificates = ({ darkMode }) => {
                             </button>
 
                             <div className="p-4 sm:p-6">
-                                <div 
-                                    className="w-full rounded-xl overflow-hidden mb-6 shadow-lg"
-                                    style={{ aspectRatio: '16/9', maxHeight: '400px' }}
-                                >
+                                <div className="mx-auto mb-6 w-full max-w-177.75 aspect-video overflow-hidden rounded-xl border-2 border-orange-500/30 shadow-lg bg-linear-to-br from-orange-500/20 to-amber-500/20">
                                     <img 
                                         src={selectedCert.image} 
                                         alt={selectedCert.title}
                                         loading="lazy"
-                                        className="w-full h-full object-contain bg-linear-to-br from-orange-500/20 to-amber-500/20"
+                                        className="w-full h-full object-contain"
                                     />
                                 </div>
 

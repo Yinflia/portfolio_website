@@ -110,17 +110,14 @@ const Contact = ({ darkMode }) => {
             },
             publicKey
         ).then(() => {
-            // LOGIC SUCCESS (Diperbaiki)
             setSending(false);
             setSent(true);
-            setFormData({ name: "", email: "", subject: "", message: "" }); // Reset form
+            setFormData({ name: "", email: "", subject: "", message: "" });
             
-            // Hilangkan pesan sukses setelah 3 detik
             setTimeout(() => {
                 setSent(false);
             }, 3000);
         }).catch((error) => {
-            // LOGIC ERROR (Diperbaiki)
             console.error("FAILED...", error.text);
             setSending(false);
             alert("Gagal mengirim pesan. Silakan coba lagi atau hubungi via email langsung.");
@@ -149,7 +146,6 @@ const Contact = ({ darkMode }) => {
                 </motion.div>
 
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-                    {/* LEFT: Let's Talk + Contact Info + Follow Me */}
                     <motion.div
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
