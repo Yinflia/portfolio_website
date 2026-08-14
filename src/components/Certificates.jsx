@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Award, Eye, X, ExternalLink } from "lucide-react";
 
-import certificate_1 from "../assets/certificate/sertificate_1.jpg";
+import certificate_1 from "../assets/certificates/sertificate_1.jpg";
 
 const certificatesData = [
     {
