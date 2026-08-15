@@ -196,10 +196,6 @@ const Certificates = ({ darkMode }) => {
                                                         {cert.issuer} • {cert.year}
                                                     </p>
                                                     
-                                                    <p className={`text-xs mb-4 ${colors.textSecondary} flex-1 line-clamp-3`}>
-                                                        {cert.description}
-                                                    </p>
-                                                    
                                                     <div className="flex flex-wrap gap-2 mt-auto">
                                                         {cert.tools.slice(0, 4).map((tool, idx) => (
                                                             <span
