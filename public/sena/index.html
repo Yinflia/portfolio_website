@@ -5,10 +5,224 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sena - Smart Economy Navigation Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animasi Shimmer untuk Skeleton */
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        .skeleton {
+            background: linear-gradient(
+                90deg,
+                #e2e8f0 0%,
+                #f1f5f9 50%,
+                #e2e8f0 100%
+            );
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
+            border-radius: 8px;
+        }
+        .skeleton-circle {
+            background: linear-gradient(
+                90deg,
+                #e2e8f0 0%,
+                #f1f5f9 50%,
+                #e2e8f0 100%
+            );
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
+            border-radius: 9999px;
+        }
+        /* Animasi fade-out skeleton */
+        .loading-screen {
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        /* Konten utama disembunyikan dulu saat loading */
+        #konten-utama {
+            opacity: 0;
+            transition: opacity 0.5s ease 0.2s;
+        }
+        #konten-utama.loaded {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body class="bg-slate-50 font-sans antialiased text-slate-800 flex flex-col min-h-screen">
 
-    <div class="max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 pb-16 flex-grow">
+    <!-- LOADING SKELETON SCREEN -->
+    <div id="loading-screen" class="loading-screen max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 pb-16">
+        
+        <!-- Skeleton Header -->
+        <div class="relative mb-8 bg-slate-100/60 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-slate-100 overflow-hidden">
+            <div class="skeleton-circle w-10 h-10 sm:w-12 sm:h-12 absolute top-3 left-4 sm:top-5 sm:left-6"></div>
+            <div class="flex flex-col items-center justify-center gap-2 w-full px-2">
+                <div class="skeleton h-6 sm:h-8 w-32 sm:w-40 rounded-lg"></div>
+                <div class="skeleton h-4 sm:h-5 w-64 sm:w-80 rounded-md mt-1"></div>
+                <div class="skeleton h-2.5 w-40 rounded-md mt-3"></div>
+            </div>
+        </div>
+
+        <!-- Skeleton Card Statistik -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-2 h-full bg-slate-200"></div>
+                <div class="flex justify-between items-start gap-2">
+                    <div class="min-w-0 flex-1">
+                        <div class="skeleton h-3 w-24 mb-3"></div>
+                        <div class="skeleton h-8 w-28"></div>
+                    </div>
+                    <div class="skeleton-circle w-10 h-10 shrink-0"></div>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-2 h-full bg-slate-200"></div>
+                <div class="flex justify-between items-start gap-2">
+                    <div class="min-w-0 flex-1">
+                        <div class="skeleton h-3 w-28 mb-3"></div>
+                        <div class="skeleton h-8 w-28"></div>
+                    </div>
+                    <div class="skeleton-circle w-10 h-10 shrink-0"></div>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-100 relative overflow-hidden sm:col-span-2 lg:col-span-1">
+                <div class="absolute top-0 left-0 w-2 h-full bg-slate-200"></div>
+                <div class="flex justify-between items-start gap-2">
+                    <div class="min-w-0 flex-1">
+                        <div class="skeleton h-3 w-20 mb-3"></div>
+                        <div class="skeleton h-8 w-28"></div>
+                    </div>
+                    <div class="skeleton-circle w-10 h-10 shrink-0"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skeleton Form & Riwayat -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+            <!-- Skeleton Form -->
+            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 lg:col-span-4 w-full">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="skeleton-circle w-6 h-6"></div>
+                    <div class="skeleton h-5 w-40"></div>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <div class="skeleton h-3 w-20 mb-2"></div>
+                        <div class="skeleton h-10 w-full rounded-xl"></div>
+                    </div>
+                    <div>
+                        <div class="skeleton h-3 w-24 mb-2"></div>
+                        <div class="skeleton h-10 w-full rounded-xl"></div>
+                    </div>
+                    <div>
+                        <div class="skeleton h-3 w-16 mb-2"></div>
+                        <div class="skeleton h-11 w-full rounded-xl"></div>
+                    </div>
+                    <div class="skeleton h-10 w-full rounded-xl"></div>
+                </div>
+            </div>
+
+            <!-- Skeleton Riwayat Transaksi -->
+            <div class="bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 lg:col-span-8 w-full overflow-hidden">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="skeleton-circle w-6 h-6"></div>
+                    <div class="skeleton h-5 w-48"></div>
+                </div>
+                
+                <!-- Skeleton Baris Tabel -->
+                <div class="space-y-0 border border-slate-100 rounded-xl overflow-hidden">
+                    <!-- Header Tabel Skeleton -->
+                    <div class="hidden md:flex bg-slate-50 p-3 gap-4 border-b border-slate-100">
+                        <div class="skeleton h-3 w-[15%]"></div>
+                        <div class="skeleton h-3 w-[30%]"></div>
+                        <div class="skeleton h-3 w-[15%]"></div>
+                        <div class="skeleton h-3 w-[25%]"></div>
+                        <div class="skeleton h-3 w-[15%]"></div>
+                    </div>
+                    <!-- Baris Tabel (Desktop) -->
+                    <div class="hidden md:block">
+                        <div class="flex p-3 gap-4 border-b border-slate-50 items-center">
+                            <div class="skeleton h-3 w-[15%]"></div>
+                            <div class="skeleton h-3 w-[30%]"></div>
+                            <div class="skeleton h-5 w-[12%]"></div>
+                            <div class="skeleton h-3 w-[25%]"></div>
+                            <div class="skeleton h-3 w-[12%]"></div>
+                        </div>
+                        <div class="flex p-3 gap-4 border-b border-slate-50 items-center">
+                            <div class="skeleton h-3 w-[15%]"></div>
+                            <div class="skeleton h-3 w-[25%]"></div>
+                            <div class="skeleton h-5 w-[14%]"></div>
+                            <div class="skeleton h-3 w-[20%]"></div>
+                            <div class="skeleton h-3 w-[12%]"></div>
+                        </div>
+                        <div class="flex p-3 gap-4 border-b border-slate-50 items-center">
+                            <div class="skeleton h-3 w-[15%]"></div>
+                            <div class="skeleton h-3 w-[35%]"></div>
+                            <div class="skeleton h-5 w-[10%]"></div>
+                            <div class="skeleton h-3 w-[28%]"></div>
+                            <div class="skeleton h-3 w-[12%]"></div>
+                        </div>
+                        <div class="flex p-3 gap-4 border-b border-slate-50 items-center">
+                            <div class="skeleton h-3 w-[15%]"></div>
+                            <div class="skeleton h-3 w-[28%]"></div>
+                            <div class="skeleton h-5 w-[12%]"></div>
+                            <div class="skeleton h-3 w-[22%]"></div>
+                            <div class="skeleton h-3 w-[12%]"></div>
+                        </div>
+                    </div>
+
+                    <!-- Skeleton Card (Mobile) -->
+                    <div class="md:hidden space-y-3 p-4">
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1 space-y-2">
+                                    <div class="skeleton h-3 w-3/4"></div>
+                                    <div class="skeleton h-2.5 w-20"></div>
+                                </div>
+                                <div class="skeleton h-5 w-14 rounded-full"></div>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-slate-200 mt-2">
+                                <div class="skeleton h-4 w-24"></div>
+                                <div class="skeleton h-4 w-12"></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1 space-y-2">
+                                    <div class="skeleton h-3 w-2/3"></div>
+                                    <div class="skeleton h-2.5 w-20"></div>
+                                </div>
+                                <div class="skeleton h-5 w-14 rounded-full"></div>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-slate-200 mt-2">
+                                <div class="skeleton h-4 w-20"></div>
+                                <div class="skeleton h-4 w-12"></div>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                            <div class="flex justify-between items-start mb-2">
+                                <div class="flex-1 space-y-2">
+                                    <div class="skeleton h-3 w-5/6"></div>
+                                    <div class="skeleton h-2.5 w-20"></div>
+                                </div>
+                                <div class="skeleton h-5 w-14 rounded-full"></div>
+                            </div>
+                            <div class="flex justify-between items-center pt-3 border-t border-slate-200 mt-2">
+                                <div class="skeleton h-4 w-28"></div>
+                                <div class="skeleton h-4 w-12"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KONTEN UTAMA (disembunyikan saat loading) -->
+    <div id="konten-utama" class="max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 pb-16 flex-grow">
         
         <header class="relative mb-8 text-center bg-blue-400/40 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             
@@ -280,6 +494,21 @@
             localStorage.setItem('transaksi', JSON.stringify(daftarTransaksi));
         }
 
+        // Fungsi untuk menyembunyikan loading skeleton
+        function sembunyikanLoading() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const kontenUtama = document.getElementById('konten-utama');
+            
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                kontenUtama.classList.add('loaded');
+                // Hapus loading screen dari DOM setelah transisi selesai
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 500);
+            }, 600); // Delay minimal 600ms agar skeleton terlihat smooth
+        }
+
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             const nominalBersih = bersihkanNominal(jumlahInput.value);
@@ -310,7 +539,9 @@
             }
         }
 
+        // Render pertama & sembunyikan loading setelah data siap
         renderTransaksi();
+        sembunyikanLoading();
     </script>
 </body>
 </html>
