@@ -133,7 +133,7 @@ const Projects = ({ darkMode }) => {
                                         href={proyek.liveDemo}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-amber-500 text-white py-3 sm:py-4 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/40 hover:scale-[1.02] inline-flex items-center justify-center gap-2"
+                                        className="w-full sm:w-auto bg-linear-to-r from-orange-500 to-amber-500 text-white py-3 sm:py-4 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/40 hover:scale-[1.02] inline-flex items-center justify-center gap-2"
                                     >
                                         <ExternalLink className="w-5 h-5" /> View Project
                                     </a>
