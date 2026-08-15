@@ -3,48 +3,84 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Award, Eye, X, ExternalLink } from "lucide-react";
 
-import certificate_1 from "../assets/certificates/sertificate_1.jpg";
+import certificate_1 from "../assets/certificates/certificate_1.jpg";
+import certificate_2 from "../assets/certificates/certificate_2.jpg";
+import certificate_3 from "../assets/certificates/certificate_3.jpg";
+import certificate_4 from "../assets/certificates/certificate_4.jpg";
+import certificate_5 from "../assets/certificates/certificate_5.jpg";
+import certificate_6 from "../assets/certificates/certificate_6.jpg";
+import certificate_7 from "../assets/certificates/certificate_7.jpg";
 
 const certificatesData = [
     {
         id: 1,
-        title: "Full Stack Web Development",
-        issuer: "Dicoding Indonesia",
-        year: "2024",
-        image: certificate_1,
-        link: "https://www.dicoding.com/certificates/0LZ0E6X91X6Y",
-        tools: ["HTML", "CSS", "JavaScript", "React", "Node.js"],
-        description: "Comprehensive full-stack development course covering frontend, backend, and database management."
+        title: "AI Productivity and AI API Integration for Developers — Maju Bareng AI Program",
+        issuer: "Hacktiv8 Indonesia (in collaboration with AVPN, supported by Google.org & ADB)",
+        year: "July 2026",
+        image: certificate_6,
+        link: "https://students.hacktiv8.com/certificates/5f5a9949-f171-4e03-8e1b-827cc87fd70b",
+        tools: ["Gemini", "Chatbot", "Gemini API", "Prompt Engineering", "REST API"],
+        description: "Completed 10 learning hours of the Maju Bareng AI program (part of the AI Opportunity Fund: Asia-Pacific) and successfully developed a final project on AI productivity and AI API integration. Certificate ID: 08448/H8/CSR/MBA2/VII/2026"
     },
     {
         id: 2,
-        title: "JavaScript Algorithms",
-        issuer: "freeCodeCamp",
-        year: "2023",
-        image: "cert2.jpg",
-        link: "https://www.freecodecamp.org/certification/fcc123/javascript-algorithms",
-        tools: ["JavaScript", "Algorithms", "Data Structures"],
-        description: "Mastered data structures and algorithms through 300+ hours of coding challenges."
+        title: "1st Integrated Speaking Program",
+        issuer: "Kampung Inggris Language Center",
+        year: "August 2026",
+        image: certificate_7,
+        link: "https://www.https://drive.google.com/file/d/1gWLvCIp5hU2SKI5oCqaXzYcZP-9ZjUJs/view?usp=sharing.org/certification/fcc123/javascript-algorithms",
+        tools: ["English Speaking", "Communication", "Public Speaking"],
+        description: "Completed a one-month intensive English speaking program with an average score of 81 (Satisfactory). Certificate No. 00592/UNIT/ISP/VIII/2026"
     },
     {
         id: 3,
-        title: "React Developer Certification",
-        issuer: "Meta (Coursera)",
-        year: "2023",
-        image: "cert3.jpg",
-        link: "https://www.coursera.org/account/accomplishments/verify/ABC123",
-        tools: ["React", "Hooks", "Redux", "JavaScript"],
-        description: "Advanced React patterns, hooks, and state management for production applications."
+        title: "Fullstack Study Jam 2026: From Interface to Infrastructure",
+        issuer: "Google Developer Groups On Campus – Institut STTS, Universitas Airlangga & Universitas Trunojoyo Madura",
+        year: "April 2026",
+        image: certificate_4,
+        link: "https://drive.google.com/file/d/16Ju7Kxew99KGE_MUA835vjEQwCEeOy9D/view?usp=sharing",
+        tools: ["HTML", "CSS", "JavaScript"],
+        description: "Participant in an on-campus fullstack study jam covering topics from frontend interface to infrastructure, held at Universitas Airlangga, Surabaya."
     },
     {
         id: 4,
-        title: "UI/UX Design Fundamentals",
-        issuer: "Google",
-        year: "2022",
-        image: "cert4.jpg",
-        link: "https://www.coursera.org/account/accomplishments/verify/XYZ789",
-        tools: ["Figma", "Design System", "Prototyping"],
-        description: "User-centered design principles, wireframing, and prototyping with Figma."
+        title: "Artificial Intelligence Trial Class",
+        issuer: "Haltev IT Learning Center",
+        year: "February 2026",
+        image: certificate_3,
+        link: "https://www.https://drive.google.com/file/d/112j0nzM8tw2aAd54eknzJ2uH8A5e7Eut/view?usp=sharing.org/account/accomplishments/verify/ABC123",
+        tools: ["Tailwind CSS", "AI Assistant Tools", "Github Pages"],
+        description: "LearHands-on experience in building a portfolio website using Tailwind CSS and AI Assistant tools, covering project setup, development, and deployment to GitHub Pages.ned the fundamentals of data analysis and machine learning, including exploratory data analysis (EDA), model development, insight generation, and decision-making processes within modern AI systems.Advanced React patterns, hooks, and state management for production applications."
+    },
+    {
+        id: 5,
+        title: "Artificial Intelligence Trial Class",
+        issuer: "Haltev IT Learning Center",
+        year: "February 2026",
+        image: certificate_1,
+        link: "https://www.https://drive.google.com/file/d/1d4bXqXSLnlgLMVNjMRy2wD2mtmjbX5ed/view?usp=sharing.org/account/accomplishments/verify/XYZ789",
+        tools: ["Python", "Google Colab"],
+        description: "User-Learned the fundamentals of data analysis and machine learning, including exploratory data analysis (EDA), model development, insight generation, and decision-making processes within modern AI systems. design principles, wireframing, and prototyping with Figma."
+    },
+    {
+        id: 6,
+        title: "Cyber Security Trial Class",
+        issuer: "Haltev IT Learning Center",
+        year: "February 2026",
+        image: certificate_2,
+        link: "https://drive.google.com/file/d/1oCewt9uI5PNV2WeB5RnCEDFrejYfyUpM/view?usp=sharing",
+        tools: ["Burp Suite", "SQLMap", "Nmap", "OWASP ZAP", "Kali Linux"],
+        description: "Learned the fundamentals of penetration testing, including vulnerability identification, IDOR and SQL Injection exploitation, code analysis, mitigation strategies, and ethical considerations in cybersecurity."
+    },
+    {
+        id: 7,
+        title: "Build with AI Tech Talk: Empowering Developers: Navigating the New Era of AI Production",
+        issuer: "Google Developer Groups On Campus – Institut Teknologi Sepuluh Nopember (GDGoC ITS)",
+        year: "May 2026",
+        image: certificate_5,
+        link: "https://drive.google.com/file/d/15fNmlmI-kyEhRRZuUg5CDukcea2X5qii/view?usp=sharing",
+        tools: ["AI Production"],
+        description: "Participant in an on-campus fullstack study jam covering topics from frontend interface to infrastructure, held at Universitas Airlangga, Surabaya."
     },
 ];
 

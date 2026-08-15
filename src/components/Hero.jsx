@@ -8,7 +8,7 @@ const Hero = ({ darkMode }) => {
     const [textIndex, setTextIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
 
-    const texts = ["Web Applications", "Mobile Apps", "Database Systems", "API Integrations", "Modern UI/UX"];
+    const texts = ["Website", "API Integrations", "Modern UI/UX"];
 
     const lightColors = {
         textPrimary: "text-gray-900",
