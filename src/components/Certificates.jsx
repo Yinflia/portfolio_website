@@ -28,13 +28,13 @@ const certificatesData = [
         issuer: "Kampung Inggris Language Center",
         year: "August 2026",
         image: certificate_7,
-        link: "https://www.https://drive.google.com/file/d/1gWLvCIp5hU2SKI5oCqaXzYcZP-9ZjUJs/view?usp=sharing.org/certification/fcc123/javascript-algorithms",
+        link: "https://drive.google.com/file/d/1gWLvCIp5hU2SKI5oCqaXzYcZP-9ZjUJs/view?usp=sharing.org/certification/fcc123/javascript-algorithms",
         tools: ["English Speaking", "Communication", "Public Speaking"],
         description: "Completed a one-month intensive English speaking program with an average score of 81 (Satisfactory). Certificate No. 00592/UNIT/ISP/VIII/2026"
     },
     {
         id: 3,
-        title: "Fullstack Study Jam 2026: From Interface to Infrastructure",
+        title: "Fullstack Study Jam 2026: “From Interface to Infrastructure”",
         issuer: "Google Developer Groups On Campus – Institut STTS, Universitas Airlangga & Universitas Trunojoyo Madura",
         year: "April 2026",
         image: certificate_4,
@@ -48,7 +48,7 @@ const certificatesData = [
         issuer: "Haltev IT Learning Center",
         year: "February 2026",
         image: certificate_3,
-        link: "https://www.https://drive.google.com/file/d/112j0nzM8tw2aAd54eknzJ2uH8A5e7Eut/view?usp=sharing.org/account/accomplishments/verify/ABC123",
+        link: "https://drive.google.com/file/d/112j0nzM8tw2aAd54eknzJ2uH8A5e7Eut/view?usp=sharing.org/account/accomplishments/verify/ABC123",
         tools: ["Tailwind CSS", "AI Assistant Tools", "Github Pages"],
         description: "LearHands-on experience in building a portfolio website using Tailwind CSS and AI Assistant tools, covering project setup, development, and deployment to GitHub Pages.ned the fundamentals of data analysis and machine learning, including exploratory data analysis (EDA), model development, insight generation, and decision-making processes within modern AI systems.Advanced React patterns, hooks, and state management for production applications."
     },
@@ -58,7 +58,7 @@ const certificatesData = [
         issuer: "Haltev IT Learning Center",
         year: "February 2026",
         image: certificate_1,
-        link: "https://www.https://drive.google.com/file/d/1d4bXqXSLnlgLMVNjMRy2wD2mtmjbX5ed/view?usp=sharing.org/account/accomplishments/verify/XYZ789",
+        link: "https://drive.google.com/file/d/1d4bXqXSLnlgLMVNjMRy2wD2mtmjbX5ed/view?usp=sharing.org/account/accomplishments/verify/XYZ789",
         tools: ["Python", "Google Colab"],
         description: "User-Learned the fundamentals of data analysis and machine learning, including exploratory data analysis (EDA), model development, insight generation, and decision-making processes within modern AI systems. design principles, wireframing, and prototyping with Figma."
     },
@@ -74,7 +74,7 @@ const certificatesData = [
     },
     {
         id: 7,
-        title: "Build with AI Tech Talk: Empowering Developers: Navigating the New Era of AI Production",
+        title: "Build with AI Tech Talk: Empowering Developers: “Navigating the New Era of AI Production”",
         issuer: "Google Developer Groups On Campus – Institut Teknologi Sepuluh Nopember (GDGoC ITS)",
         year: "May 2026",
         image: certificate_5,

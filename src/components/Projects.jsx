@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import project1_home_page from "../assets/projects/project1/home_page.png";
+import project1_home_page from "../assets/projects/project1.png";
 
 const Projects = ({ darkMode }) => {
     const projectsData = {

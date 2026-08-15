@@ -3,6 +3,10 @@
     {
       "source": "/sena/:path*",
       "destination": "/sena/index.html"
+    },
+    {
+      "source": "/linktree/:path*",
+      "destination": "/linktree/index.html"
     }
   ]
 }
