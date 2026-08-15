@@ -22,6 +22,7 @@ html {
     animation:
         lanyardDrop 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
         lanyardSway 4s ease-in-out 1.6s infinite;
+    filter: drop-shadow(0 25px 50px rgba(0,0,0,0.6));
 }
 
 .lanyard-strap {
@@ -189,11 +190,23 @@ html {
 .lanyard-container:hover .id-photo-wrapper img { transform: scale(1.1); }
 
 @keyframes lanyardDrop {
-    0% { transform: translateY(-120vh) rotate(0deg); opacity: 0; }
-    50% { opacity: 1; }
-    70% { transform: translateY(15px) rotate(0deg); }
-    85% { transform: translateY(-8px) rotate(0deg); }
-    100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    0% { 
+        transform: translateY(-120vh) rotate(0deg); 
+        opacity: 0; 
+    }
+    50% { 
+        opacity: 1; 
+    }
+    70% { 
+        transform: translateY(15px) rotate(0deg); 
+    }
+    85% { 
+        transform: translateY(-8px) rotate(0deg); 
+    }
+    100% { 
+        transform: translateY(0) rotate(0deg); 
+        opacity: 1; 
+    }
 }
 
 @keyframes lanyardSway {

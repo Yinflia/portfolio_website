@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import heroImg from "../assets/hero.png";
 import { FolderOpen } from "lucide-react";
 
-// Terima props isLoaded dari App.jsx
-const Hero = ({ darkMode, isLoaded }) => {
+const Hero = ({ darkMode, isLoading }) => {
     const [typedText, setTypedText] = useState("");
     const [textIndex, setTextIndex] = useState(0);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -30,9 +29,6 @@ const Hero = ({ darkMode, isLoaded }) => {
     const colors = darkMode ? darkColors : lightColors;
 
     useEffect(() => {
-        // Typing effect hanya jalan jika sudah di-load
-        if (!isLoaded) return;
-
         const currentText = texts[textIndex];
         const timeout = setTimeout(() => {
             if (!isDeleting) {
@@ -52,9 +48,8 @@ const Hero = ({ darkMode, isLoaded }) => {
         }, isDeleting ? 50 : 100);
 
         return () => clearTimeout(timeout);
-    }, [typedText, isDeleting, textIndex, isLoaded]);
+    }, [typedText, isDeleting, textIndex, texts]);
 
-    // Handle navigation with offset 30px
     const handleNavClick = (e, href) => {
         e.preventDefault();
         setTimeout(() => {
@@ -71,12 +66,14 @@ const Hero = ({ darkMode, isLoaded }) => {
         <section id="home" className="min-h-screen flex items-center justify-center py-20 px-6 md:px-8 lg:px-16">
             <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
                 
-                {/* Content - Order 2 di mobile/tablet */}
+                {/* CONTENT SIDE - Pakai Framer Motion untuk slide dari kiri */}
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}
-                    // Animasi hanya jalan jika isLoaded = true
-                    animate={isLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                    animate={{ 
+                        opacity: isLoading ? 0 : 1, 
+                        x: isLoading ? -50 : 0 
+                    }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
                     className="text-center lg:text-left order-2 lg:order-1"
                 >
                     <div className={`inline-block px-4 py-2 rounded-full border text-sm font-semibold mb-6 ${colors.badge}`}>
@@ -113,28 +110,31 @@ const Hero = ({ darkMode, isLoaded }) => {
                     </div>
                 </motion.div>
 
-                {/* Lanyard Visual - Order 1 di mobile/tablet (di atas) */}
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    // Animasi lanyard dengan delay lebih lama agar muncul setelah teks
-                    animate={isLoaded ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                    className="flex justify-center order-1 lg:order-2 mb-8 lg:mb-0"
+                {/* LANYARD SIDE - TANPA Framer Motion, hanya CSS */}
+                {/* LANYARD SIDE - Conditional render agar CSS animation restart dari awal */}
+                <div 
+                    className={`flex justify-center order-1 lg:order-2 mb-8 lg:mb-0 transition-opacity duration-1000 ${
+                        isLoading ? 'opacity-0' : 'opacity-100'
+                    }`}
                 >
-                    <div className="lanyard-container">
-                        <div className="lanyard-strap"></div>
-                        <div className="breakaway-clip"></div>
-                        <div className="metal-hook"></div>
-                        <div className="id-card-holder">
-                            <div className="card-slot"></div>
-                            <div className="id-card-content">
-                                <div className="id-photo-wrapper">
-                                    <img src={heroImg} alt="Nabila Falih Amalia" />
+                    {/* Element baru di-mount saat isLoading = false, sehingga CSS animation jalan dari awal */}
+                    {!isLoading && (
+                        <div className="lanyard-container">
+                            <div className="lanyard-strap"></div>
+                            <div className="breakaway-clip"></div>
+                            <div className="metal-hook"></div>
+                            <div className="id-card-holder">
+                                <div className="card-slot"></div>
+                                <div className="id-card-content">
+                                    <div className="id-photo-wrapper">
+                                        <img src={heroImg} alt="Nabila Falih Amalia" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </motion.div>
+                    )}
+                </div>
+
             </div>
         </section>
     );

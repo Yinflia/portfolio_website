@@ -17,22 +17,14 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // 1. PAKSA SCROLL KE ATAS (HERO) SAAT REFRESH/MOUNT
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
-    // 2. Inisialisasi AOS
-    AOS.init({
-      duration: 1000,
-      once: false,
-      offset: 100
-    });
-    
-    document.documentElement.classList.add('dark');
-
-    // 3. Simulasi loading screen selama 2.5 detik
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2500);
+
+    AOS.init({ duration: 1000, once: false, offset: 100 });
+    document.documentElement.classList.add('dark');
 
     return () => clearTimeout(timer);
   }, []);
@@ -49,7 +41,6 @@ const App = () => {
 
   return (
     <>
-      {/* Loading Screen */}
       <AnimatePresence>
         {isLoading && <LoadingScreen darkMode={darkMode} />}
       </AnimatePresence>
@@ -63,9 +54,7 @@ const App = () => {
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         
         <main className="relative z-10">
-          {/* Kirim sinyal isLoaded ke Hero agar animasinya mulai setelah loading selesai */}
-          <Hero darkMode={darkMode} isLoaded={!isLoading} />
-          
+          <Hero darkMode={darkMode} isLoading={isLoading} />
           <About darkMode={darkMode} />
           <Skills darkMode={darkMode} />
           <Projects darkMode={darkMode} />
@@ -73,7 +62,6 @@ const App = () => {
           <Contact darkMode={darkMode} />
         </main>
 
-        {/* Footer */}
         <footer className={`relative z-10 py-8 text-center border-t transition-colors duration-300 ${
           darkMode ? "border-gray-800 text-gray-400" : "border-gray-200 text-gray-600"
         }`}>
