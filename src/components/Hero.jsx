@@ -110,29 +110,27 @@ const Hero = ({ darkMode, isLoading }) => {
                     </div>
                 </motion.div>
 
-                {/* LANYARD SIDE - TANPA Framer Motion, hanya CSS */}
-                {/* LANYARD SIDE - Conditional render agar CSS animation restart dari awal */}
-                <div 
-                    className={`flex justify-center order-1 lg:order-2 mb-8 lg:mb-0 transition-opacity duration-1000 ${
-                        isLoading ? 'opacity-0' : 'opacity-100'
-                    }`}
-                >
-                    {/* Element baru di-mount saat isLoading = false, sehingga CSS animation jalan dari awal */}
-                    {!isLoading && (
-                        <div className="lanyard-container">
-                            <div className="lanyard-strap"></div>
-                            <div className="breakaway-clip"></div>
-                            <div className="metal-hook"></div>
-                            <div className="id-card-holder">
-                                <div className="card-slot"></div>
-                                <div className="id-card-content">
-                                    <div className="id-photo-wrapper">
-                                        <img src={heroImg} alt="Nabila Falih Amalia" />
-                                    </div>
+                <div className="flex justify-center order-1 lg:order-2 mb-8 lg:mb-0">
+                    <div 
+                        className="lanyard-container" 
+                        key={isLoading ? 'hidden' : 'visible'}
+                        style={{ 
+                            opacity: isLoading ? 0 : 1,
+                            animationPlayState: isLoading ? 'paused' : 'running'
+                        }}
+                    >
+                        <div className="lanyard-strap"></div>
+                        <div className="breakaway-clip"></div>
+                        <div className="metal-hook"></div>
+                        <div className="id-card-holder">
+                            <div className="card-slot"></div>
+                            <div className="id-card-content">
+                                <div className="id-photo-wrapper">
+                                    <img src={heroImg} alt="Nabila Falih Amalia" />
                                 </div>
                             </div>
                         </div>
-                    )}
+                    </div>
                 </div>
 
             </div>
