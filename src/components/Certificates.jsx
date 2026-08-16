@@ -74,7 +74,7 @@ const certificatesData = [
     },
     {
         id: 7,
-        title: "Build with AI Tech Talk: Empowering Developers: “Navigating the New Era of AI Production”",
+        title: "Build with AI Tech Talk “Empowering Developers: Navigating the New Era of AI Production”",
         issuer: "Google Developer Groups On Campus – Institut Teknologi Sepuluh Nopember (GDGoC ITS)",
         year: "May 2026",
         image: certificate_5,
