@@ -307,7 +307,7 @@ const Certificates = ({ darkMode }) => {
                            <button
                                 onClick={() => setSelectedCert(null)}
                                 aria-label="Tutup"
-                                className={`absolute -top-[10px] -right-[10px] sm:-top-[20px] sm:-right-[20px] z-20 size-9 sm:size-10 rounded-full flex items-center justify-center p-0 transition-colors cursor-pointer shadow-lg border ${
+                                className={`absolute -top-[5px] -right-[5px] sm:-top-[20px] sm:-right-[20px] z-20 size-9 sm:size-10 rounded-full flex items-center justify-center p-0 transition-colors cursor-pointer shadow-lg border ${
                                     darkMode
                                         ? 'bg-gray-700 hover:bg-gray-600 text-white border-gray-600'
                                         : 'bg-gray-200 hover:bg-gray-300 text-gray-900 border-gray-300'
