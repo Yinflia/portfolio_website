@@ -92,8 +92,8 @@ const Hero = ({ darkMode, isLoading }) => {
                     </div>
 
                     <p className={`text-base sm:text-lg mb-8 max-w-xl mx-auto lg:mx-0 ${colors.textSecondary}`}>
-                        Passionate programmer who loves creating elegant solutions to complex problems.
-                        Specialized in building modern web applications with cutting-edge technologies.
+                        Informatics student passionate about programming, web development, and creating meaningful digital experiences. 
+                        I enjoy turning ideas into clean, functional, and modern solutions while continuously learning new technologies.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center sm:items-start">

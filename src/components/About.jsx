@@ -55,18 +55,18 @@ const About = ({ darkMode }) => {
                         </h3>
 
                         <p className={`mb-4 leading-relaxed text-left ${colors.textSecondary}`}>
-                            I am a Software Engineering student with a disciplined and detail-oriented approach to development.
-                            I pride myself on my ability to write clean, maintainable code and my commitment to meeting project deadlines.
+                            I am an Informatics student with a strong interest in programming, web development, and technology. 
+                            I enjoy learning how things work, solving problems through code, and turning ideas into functional and modern digital experiences.
                         </p>
 
                         <p className={`mb-4 leading-relaxed text-left ${colors.textSecondary}`}>
-                            I am a collaborative team player who values constructive feedback and is dedicated to contributing technical solutions
-                            that align with organizational goals.
+                           I believe that learning is a continuous process. 
+                           I am always looking for opportunities to improve my skills, explore new technologies, and challenge myself through projects and new experiences.
                         </p>
 
                         <p className={`mb-8 leading-relaxed text-left ${colors.textSecondary}`}>
-                            When I'm not coding, you'll find me exploring new technologies, contributing to
-                            open-source projects, or sharing knowledge with the developer community.
+                            When I'm not coding, you'll often find me exploring new ideas, learning something new, or working on personal projects. 
+                            I enjoy building things from scratch and seeing how an idea can grow into something meaningful.
                         </p>
 
                         {/* <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center sm:items-start">

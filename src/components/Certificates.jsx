@@ -194,7 +194,7 @@ const Certificates = ({ darkMode }) => {
                                                 <div className="overflow-hidden rounded-md mb-4 relative shadow-md group-hover:shadow-xl group-hover:shadow-orange-500/20 transition-all duration-300">
                                                     <div 
                                                         className={`w-full flex items-center justify-center ${darkMode ? 'bg-gray-700/50' : 'bg-gray-100'}`}
-                                                        style={{ aspectRatio: '4/3' }}
+                                                        style={{ aspectRatio: '17/12' }}
                                                     >
                                                         <img 
                                                             src={cert.image} 
@@ -286,13 +286,14 @@ const Certificates = ({ darkMode }) => {
             </div>
 
             {/* MODAL FULL SCREEN */}
-            {typeof window !== 'undefined' && selectedCert && createPortal(
-                <AnimatePresence>
+            {typeof window !== 'undefined' && createPortal(
+            <AnimatePresence>
+                {selectedCert && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-99999 flex items-center justify-center p-2 sm:p-4"
+                        className="fixed inset-0 z-[99999] flex items-center justify-center p-5 sm:p-8"
                         style={{ backgroundColor: 'rgba(0, 0, 0, 0.95)' }}
                         onClick={() => setSelectedCert(null)}
                     >
@@ -301,66 +302,74 @@ const Certificates = ({ darkMode }) => {
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className={`relative w-full max-w-4xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-xl sm:rounded-2xl border ${colors.border} ${colors.modalBg} shadow-2xl`}
+                            className="relative w-full max-w-4xl"
                         >
                             <button
                                 onClick={() => setSelectedCert(null)}
-                                className={`absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
-                                    darkMode ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-gray-200 hover:bg-gray-300 text-gray-900'
+                                aria-label="Tutup"
+                                className={`absolute -top-[10px] -right-[10px] sm:-top-[20px] sm:-right-[20px] z-20 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-lg border ${
+                                    darkMode
+                                        ? 'bg-gray-700 hover:bg-gray-600 text-white border-gray-600'
+                                        : 'bg-gray-200 hover:bg-gray-300 text-gray-900 border-gray-300'
                                 }`}
                             >
                                 <X className="w-4 h-4 sm:w-5 sm:h-5" />
                             </button>
 
-                            <div className="p-4 sm:p-6">
-                                <div className="mx-auto mb-6 w-full max-w-177.75 aspect-video overflow-hidden rounded-xl border-2 border-orange-500/30 shadow-lg bg-linear-to-br from-orange-500/20 to-amber-500/20">
-                                    <img 
-                                        src={selectedCert.image} 
-                                        alt={selectedCert.title}
-                                        loading="lazy"
-                                        className="w-full h-full object-contain"
-                                    />
-                                </div>
+                            <div
+                                className={`max-h-[85vh] sm:max-h-[90vh] overflow-y-auto rounded-xl sm:rounded-2xl border ${colors.border} ${colors.modalBg} shadow-2xl`}
+                            >
+                                <div className="p-4 sm:p-6">
+                                    <div className="mx-auto mb-6 w-full max-w-[80%] aspect-[17/12] overflow-hidden rounded-xl border-2 border-orange-500/30 shadow-lg bg-linear-to-br from-orange-500/20 to-amber-500/20">
+                                        <img 
+                                            src={selectedCert.image} 
+                                            alt={selectedCert.title}
+                                            loading="lazy"
+                                            className="w-full h-full object-contain"
+                                        />
+                                    </div>
 
-                                <h2 className={`text-xl sm:text-3xl font-bold mb-4 ${colors.textPrimary}`}>
-                                    {selectedCert.title}
-                                </h2>
-                                
-                                <p className={`mb-6 leading-relaxed text-sm sm:text-base ${colors.textSecondary}`}>
-                                    {selectedCert.description}
-                                </p>
+                                    <h2 className={`text-xl sm:text-3xl font-bold mb-4 ${colors.textPrimary}`}>
+                                        {selectedCert.title}
+                                    </h2>
+                                    
+                                    <p className={`mb-6 leading-relaxed text-sm sm:text-base ${colors.textSecondary}`}>
+                                        {selectedCert.description}
+                                    </p>
 
-                                <div className="flex flex-wrap gap-2 mb-8">
-                                    {selectedCert.tools.map((tech, idx) => (
-                                        <span
-                                            key={idx}
-                                            className={`py-1.5 px-3 sm:px-4 border rounded-full font-semibold text-xs sm:text-sm ${
-                                                darkMode
-                                                    ? 'border-orange-500/30 bg-orange-900/20 text-orange-400'
-                                                    : 'border-orange-300 bg-orange-50 text-orange-700'
-                                            }`}
+                                    <div className="flex flex-wrap gap-2 mb-8">
+                                        {selectedCert.tools.map((tech, idx) => (
+                                            <span
+                                                key={idx}
+                                                className={`py-1.5 px-3 sm:px-4 border rounded-full font-semibold text-xs sm:text-sm ${
+                                                    darkMode
+                                                        ? 'border-orange-500/30 bg-orange-900/20 text-orange-400'
+                                                        : 'border-orange-300 bg-orange-50 text-orange-700'
+                                                }`}
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+                                        <a 
+                                            href={selectedCert.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="w-full sm:w-auto bg-linear-to-r from-orange-500 to-amber-500 text-white py-3 sm:py-4 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/40 hover:scale-[1.02] inline-flex items-center justify-center gap-2 cursor-pointer"
                                         >
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
-                                    <a 
-                                        href={selectedCert.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="w-full sm:w-auto bg-linear-to-r from-orange-500 to-amber-500 text-white py-3 sm:py-4 px-6 rounded-lg font-semibold text-center transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/40 hover:scale-[1.02] inline-flex items-center justify-center gap-2 cursor-pointer"
-                                    >
-                                        <ExternalLink className="w-5 h-5" /> View Certificate
-                                    </a>
+                                            <ExternalLink className="w-5 h-5" /> View Certificate
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </motion.div>
                     </motion.div>
-                </AnimatePresence>,
-                document.body
-            )}
+                )}
+            </AnimatePresence>,
+            document.body
+        )}
         </section>
     );
 };
