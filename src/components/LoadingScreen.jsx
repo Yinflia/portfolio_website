@@ -61,13 +61,6 @@ const LoadingScreen = ({ darkMode }) => {
                     </div>
                 </div>
             </div>
-
-            {/* Loading Text */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-center">
-                <p className={`text-sm font-medium animate-pulse ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-                    Loading Portfolio...
-                </p>
-            </div>
         </motion.div>
     );
 };
